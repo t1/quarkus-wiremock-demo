@@ -26,9 +26,8 @@ import static jakarta.ws.rs.core.MediaType.TEXT_PLAIN;
 import static jakarta.ws.rs.core.MediaType.TEXT_PLAIN_TYPE;
 import static jakarta.ws.rs.core.MediaType.WILDCARD;
 
-public class WireMockExtension<T> {
-    private static final Jsonb JSONB = JsonbBuilder.create(new JsonbConfig()
-            .withFormatting(true));
+public class WireMocker<T> {
+    private static final Jsonb JSONB = JsonbBuilder.create(new JsonbConfig().withFormatting(true));
     private static final Object[] NO_ARGS = new Object[0];
 
     private static Given given;
@@ -39,7 +38,7 @@ public class WireMockExtension<T> {
     private final Class<T> apiClass;
     private final WireMock wireMock;
 
-    public WireMockExtension(WireMock wireMock, Class<T> apiClass) {
+    public WireMocker(WireMock wireMock, Class<T> apiClass) {
         this.wireMock = wireMock;
         this.apiClass = apiClass;
         this.api = proxy(apiClass);
@@ -74,7 +73,7 @@ public class WireMockExtension<T> {
         return null;
     }
 
-    private record Given(WireMockExtension<?> extension, Method method, Object... args) {}
+    private record Given(WireMocker<?> extension, Method method, Object... args) {}
 
     public record StubBuilder() {
         public void returns(Object body) {

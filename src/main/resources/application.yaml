@@ -1,4 +1,7 @@
 quarkus:
+  wiremock:
+    devservices:
+      extension-scanning-enabled: true
   rest-client:
     logging:
       scope: request-response

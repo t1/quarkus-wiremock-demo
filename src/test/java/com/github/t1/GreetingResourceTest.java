@@ -8,9 +8,10 @@ import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
 import java.net.URI;
 
-import static com.github.t1.WireMockExtension.given;
+import static com.github.t1.WireMocker.given;
 import static org.assertj.core.api.BDDAssertions.then;
 
 @QuarkusTest
@@ -21,13 +22,13 @@ class GreetingResourceTest {
     GreetingApi greetingApi;
 
     WireMock wireMock;
-    WireMockExtension<NameServiceApi> nameService;
+    WireMocker<NameServiceApi> nameService;
 
     @BeforeEach void setup() {
         greetingApi = RestClientBuilder.newBuilder().baseUri(baseUri).build(GreetingApi.class);
 
         wireMock.resetMappings();
-        nameService = new WireMockExtension<>(wireMock, NameServiceApi.class);
+        nameService = new WireMocker<>(wireMock, NameServiceApi.class);
     }
 
     @Test
@@ -37,5 +38,13 @@ class GreetingResourceTest {
         var response = greetingApi.hello();
 
         then(response).isEqualTo(new Greeting("Hello", "World"));
+    }
+
+    @Test
+    void testStandardMapping() throws Exception {
+        var inputStream = (InputStream) URI.create(nameService.uri() + "/foo").toURL().getContent();
+        var body = new String(inputStream.readAllBytes());
+
+        then(body).isEqualTo("{\"foo\":\"bar\"}");
     }
 }
