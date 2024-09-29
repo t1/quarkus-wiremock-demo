@@ -1,0 +1,21 @@
+= Quarkus WireMock Extension Demo
+
+Demonstrates how to use the https://docs.quarkiverse.io/quarkus-wiremock/dev/index.html[Quarkus WireMock Extension]... with a little helper for the mocking.
+
+The two interesting classes are:
+
+- `WireMocker` - allows to do the stubbing a litte bit like Mockito with JAX-RS API interfaces.
+Reduce boilerplate code for the mocking.
+- `NameServiceStandardMappings` - a WireMock extension that adds default stubs.
+Very useful while running Quarkus in dev mode.
+
+== Running
+
+To see it all in action, simply run:
+
+[source,shell]
+----
+mvn quarkus:dev
+----
+
+Then type `o` to see the test output, and `r` to run the tests.
