@@ -1,0 +1,5 @@
+quarkus:
+  rest-client:
+    name-service:
+      uri:
+        http://localhost:${quarkus.wiremock.devservices.port}
