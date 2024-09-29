@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.t1.WireMockExtension.given;
 import static org.assertj.core.api.BDDAssertions.then;
 
 @QuarkusTest
@@ -20,19 +18,21 @@ import static org.assertj.core.api.BDDAssertions.then;
 class GreetingResourceTest {
     @TestHTTPResource
     URI baseUri;
+    GreetingApi greetingApi;
 
     WireMock wireMock;
-    GreetingApi greetingApi;
+    WireMockExtension<NameServiceApi> nameService;
 
     @BeforeEach void setup() {
         greetingApi = RestClientBuilder.newBuilder().baseUri(baseUri).build(GreetingApi.class);
+
         wireMock.resetMappings();
+        nameService = new WireMockExtension<>(wireMock, NameServiceApi.class);
     }
 
     @Test
     void testHelloEndpoint() {
-        wireMock.register(get(urlEqualTo("/name"))
-                .willReturn(aResponse().withBody("World")));
+        given(nameService.api.name()).returns("World");
 
         var response = greetingApi.hello();
 
