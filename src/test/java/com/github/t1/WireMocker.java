@@ -119,7 +119,6 @@ public class WireMocker<T> {
 
 
     /** This is a real REST client for the provided API */
-    @SuppressWarnings("unused")
     public T client() {return RestClientBuilder.newBuilder().baseUri(uri()).build(apiClass);}
 
     public URI uri() {

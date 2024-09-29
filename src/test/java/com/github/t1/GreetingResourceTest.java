@@ -41,6 +41,15 @@ class GreetingResourceTest {
     }
 
     @Test
+    void testClient() {
+        given(nameService.api.name()).returns("World");
+
+        var response = nameService.client().name();
+
+        then(response).isEqualTo("World");
+    }
+
+    @Test
     void testStandardMapping() throws Exception {
         var inputStream = (InputStream) URI.create(nameService.uri() + "/foo").toURL().getContent();
         var body = new String(inputStream.readAllBytes());
