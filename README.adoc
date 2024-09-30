@@ -7,7 +7,12 @@ The two interesting classes are:
 - https://github.com/t1/quarkus-wiremock-demo/blob/trunk/src/test/java/com/github/t1/WireMocker.java[`WireMocker`] - allows to do the stubbing a litte bit like Mockito with JAX-RS API interfaces.
 Reduce boilerplate code for the mocking.
 - https://github.com/t1/quarkus-wiremock-demo/blob/trunk/src/test/java/com/github/t1/NameServiceStandardMappings.java[`NameServiceStandardMappings`] - a WireMock extension that adds default stubs.
-Very useful while running Quarkus in dev mode.
+
+The latter would be very useful when running Quarkus in dev mode, but this doesn't work:
+the extension is not loaded for the dev mode if the `META-INF/services/...Extension` file is in `src/test/resources`... OTOH we don't want to put it in `src/main/resources` because it's only for dev-testing.
+Actually, Quarkus starts a _second_ `WireMock` dev-service when running the tests in dev mode.
+
+I don't have a solution for this yet.
 
 == Running
 
