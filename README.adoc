@@ -12,7 +12,7 @@ The latter would be very useful when running Quarkus in dev mode, but this doesn
 the extension is not loaded for the dev mode if the `META-INF/services/...Extension` file is in `src/test/resources`... OTOH we don't want to put it in `src/main/resources` because it's only for dev-testing.
 Actually, Quarkus starts a _second_ `WireMock` dev-service when running the tests in dev mode.
 
-I don't have a solution for this yet.
+The only solution I found, is to put mappings files in `src/test/resources/mappings/*.json`.
 
 == Running
 

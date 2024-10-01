@@ -50,10 +50,17 @@ class GreetingResourceTest {
     }
 
     @Test
-    void testStandardMapping() throws Exception {
+    void testMappingFromExtension() throws Exception {
         var inputStream = (InputStream) URI.create(nameService.uri() + "/foo").toURL().getContent();
         var body = new String(inputStream.readAllBytes());
 
         then(body).isEqualTo("{\"foo\":\"bar\"}");
+    }
+
+    @Test
+    void testMappingsFile() {
+        var response = greetingApi.hello();
+
+        then(response).isEqualTo(new Greeting("Hello", "File"));
     }
 }

@@ -14,3 +14,5 @@ quarkus:
         level: DEBUG
       "org.jboss.resteasy.reactive.server.handlers":
         level: DEBUG
+      "io.quarkiverse.wiremock":
+        level: DEBUG
