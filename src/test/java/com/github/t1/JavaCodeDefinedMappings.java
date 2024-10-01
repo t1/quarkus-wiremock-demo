@@ -8,7 +8,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
 
 @JBossLog
-public class NameServiceStandardMappings implements MappingsLoaderExtension {
+public class JavaCodeDefinedMappings implements MappingsLoaderExtension {
     @Override
     public String getName() {
         return "name-service-mappings";
