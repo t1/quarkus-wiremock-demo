@@ -11,7 +11,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
 public class JavaCodeDefinedMappings implements MappingsLoaderExtension {
     @Override
     public String getName() {
-        return "name-service-mappings";
+        return "names-mappings";
     }
 
     @Override

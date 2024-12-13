@@ -7,8 +7,8 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import static jakarta.ws.rs.core.MediaType.TEXT_PLAIN;
 
-@RegisterRestClient(configKey = "name-service")
-public interface NameServiceApi {
+@RegisterRestClient(baseUri = "http://localhost:8081", configKey = "hellos")
+public interface HellosApi {
     @Produces(TEXT_PLAIN)
-    @GET @Path("/name") String name();
+    @GET @Path("/hello") String hello();
 }

@@ -3,7 +3,7 @@ name: Java CI
 on:
   push:
   pull_request:
-  schedule: [ cron: '4 3 * * 5' ] # weekly: At 03:04 on Friday
+  schedule: [ cron: '4 3 * * 5' ]
 
 jobs:
   build:

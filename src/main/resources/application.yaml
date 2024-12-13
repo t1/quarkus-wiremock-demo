@@ -5,9 +5,10 @@ quarkus:
   rest-client:
     logging:
       scope: request-response
-    name-service:
-      uri:
-        http://localhost:${quarkus.wiremock.devservices.port}
+    hellos:
+      uri: http://localhost:${quarkus.port}
+    names:
+      uri: http://localhost:${quarkus.wiremock.devservices.port}
   log:
     category:
       "org.jboss.resteasy.reactive.client.logging":

@@ -2,17 +2,19 @@
 
 Demonstrates how to use the https://docs.quarkiverse.io/quarkus-wiremock/dev/index.html[Quarkus WireMock Extension]... with a little helper for the mocking.
 
-The two interesting classes are:
+The three interesting classes are:
 
-- https://github.com/t1/quarkus-wiremock-demo/blob/trunk/src/test/java/com/github/t1/WireMocker.java[`WireMocker`] - allows to do the stubbing a litte bit like Mockito with JAX-RS API interfaces.
-Reduce boilerplate code for the mocking.
-- https://github.com/t1/quarkus-wiremock-demo/blob/trunk/src/test/java/com/github/t1/NameServiceStandardMappings.java[`NameServiceStandardMappings`] - a WireMock extension that adds default stubs.
+1. https://github.com/t1/quarkus-wiremock-demo/blob/trunk/src/test/java/com/github/t1/WireMocker.java[`WireMocker`] - allows to do the stubbing a litte bit like Mockito with JAX-RS API interfaces.
+Reduces the boilerplate code normally necessary for WireMock.
+2. https://github.com/t1/quarkus-wiremock-demo/blob/trunk/src/test/java/com/github/t1/JavaCodeDefinedMappings.java[`JavaCodeDefinedMappings`] - a WireMock extension that adds default stubs.
+Shows how to use the WireMock extension mechanism.
+3. https://github.com/t1/quarkus-wiremock-demo/blob/trunk/src/dev/java/dev/mock/HelloResource.java[`HelloResource`] - a "real" Mock class available in dev- and test-mode.
+Shows an alternative to using WireMock.
 
-The latter would be very useful when running Quarkus in dev mode, but this doesn't work:
-the extension is not loaded for the dev mode if the `META-INF/services/...Extension` file is in `src/test/resources`... OTOH we don't want to put it in `src/main/resources` because it's only for dev-testing.
-Actually, Quarkus starts a _second_ `WireMock` dev-service when running the tests in dev mode.
-
-The only solution I found, is to put mappings files in `src/test/resources/mappings/*.json`.
+The second would be useful not only for tests, but also when running Quarkus in dev mode, but this doesn't work:
+the extension is not loaded for the dev mode if the `META-INF/services/...Extension` file is in `src/test/resources` nor from `src/dev/resources`... OTOH we don't want to put it in `src/main/resources` because it's only for dev-mode and testing.
+Actually, Quarkus starts a _second_ `WireMock` dev-service when running the tests in dev mode, and this one doesn't recognize the extensions for the tests.
+The only solution I found, is to put mappings files in `src/test/resources/mappings/*.json`... no dynamic code here.
 
 == Running
 
